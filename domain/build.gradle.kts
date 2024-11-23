@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.devtools.ksp)
 }
 
 android {
@@ -35,7 +36,6 @@ android {
 }
 
 dependencies {
-//    implementation(project(":data"))
     // Только базовые зависимости, так как domain — независимый модуль.
     implementation(libs.androidx.core.ktx)
     implementation(libs.javax.inject)

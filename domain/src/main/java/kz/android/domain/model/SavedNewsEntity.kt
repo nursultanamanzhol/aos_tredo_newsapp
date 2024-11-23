@@ -5,5 +5,5 @@ data class SavedNewsEntity(
     val title: String,
     val author: String?,
     val content: String?,
-    val publishedAt: String
+    val publishedAt: String,
 )

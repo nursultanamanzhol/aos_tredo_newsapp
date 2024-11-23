@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt) // Для Room и Hilt
+    alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.hilt.android)
 }
 
@@ -34,13 +34,6 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    kapt {
-        arguments {
-            arg("room.schemaLocation", "$projectDir/schemas")
-            arg("room.incremental", "true")
-        }
-        correctErrorTypes = true
-    }
 }
 
 dependencies {
@@ -53,13 +46,12 @@ dependencies {
 
     // Room для локального хранения данных
     implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.junit.ktx)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
     // Hilt для внедрения зависимостей
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     // Android core
     implementation(libs.androidx.core.ktx)
@@ -67,9 +59,8 @@ dependencies {
     implementation(libs.material)
 
     // Unit Testing
-    testImplementation(libs.junit)
-
-    // Android Testing
     androidTestImplementation(libs.androidx.junit)
+    testImplementation(libs.junit)
+    implementation(libs.androidx.junit.ktx)
     androidTestImplementation(libs.androidx.espresso.core)
 }

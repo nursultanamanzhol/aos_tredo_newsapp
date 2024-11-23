@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -34,16 +35,14 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
-    }
-    kapt {
-        correctErrorTypes = true
-    }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15"
+    }
 }
 
 dependencies {
@@ -61,12 +60,11 @@ dependencies {
     implementation(libs.androidx.material.icons.extended) // Для иконок
 
     // ViewModel & LiveData
-    implementation(libs.hilt.android)
     implementation(libs.androidx.lifecycle.viewmodel.android)
     implementation(libs.androidx.runtime.livedata)
 
     // Navigation
-    implementation(libs.androidx.material) // Убедитесь, что эта версия добавлена для Compose
+    implementation(libs.androidx.material)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
 
@@ -82,7 +80,7 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     // Android Testing
     androidTestImplementation(libs.androidx.junit)
