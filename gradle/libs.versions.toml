@@ -3,7 +3,7 @@ agp = "8.1.1"
 converterGson = "2.9.0"
 coreTesting = "2.1.0"
 foundationLayout = "1.5.2"
-hiltAndroidCompiler = "2.48"
+hiltAndroidCompiler = "2.45"
 hiltNavigationCompose = "1.0.0"
 javaxInject = "1"
 kotlin = "1.9.10"
@@ -17,7 +17,7 @@ activityCompose = "1.7.2"
 composeBom = "2023.09.01"
 appcompat = "1.6.1"
 material = "1.9.0"
-hiltAndroid = "2.48"
+hiltAndroid = "2.45"
 lifecycleViewmodelAndroid = "2.8.7"
 materialVersion = "1.5.2"
 mockitoCore = "4.11.0"
@@ -26,7 +26,7 @@ mockitoKotlin = "4.1.0"
 mockk = "1.13.3"
 navigationCompose = "2.7.2"
 retrofit = "2.9.0"
-roomRuntime = "2.6.1"
+roomRuntime = "2.5.0"
 runtimeLivedata = "1.5.2"
 junitKtx = "1.2.1"
 
@@ -72,7 +72,7 @@ androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version = "1.9.10" }
-hilt-android = { id = "com.google.dagger.hilt.android", version = "2.48" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+hilt-android = { id = "com.google.dagger.hilt.android", version = "2.45" }

@@ -17,10 +17,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven("https://jitpack.io") // Добавьте, если его нет
+        maven("https://jitpack.io")
     }
 }
-
 rootProject.name = "aos_tredo_newsapp"
 include(":app")
 include(":domain")
