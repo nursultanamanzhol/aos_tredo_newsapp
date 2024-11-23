@@ -24,8 +24,7 @@ class SavedNewsViewModel @Inject constructor(
         }
     }
 
-
-    fun openDetails(article: SavedNewsEntity) {
-        // Логика открытия деталей статьи
+    fun getSavedArticleByUrl(url: String): SavedNewsEntity? {
+        return savedNews.value?.find { it.url == url }
     }
 }

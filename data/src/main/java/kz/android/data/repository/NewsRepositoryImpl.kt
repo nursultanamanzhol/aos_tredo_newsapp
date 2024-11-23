@@ -1,6 +1,5 @@
 package kz.android.data.repository
 
-import kotlinx.coroutines.flow.first
 import kz.android.data.api.NewsApiService
 import kz.android.data.db.NewsDao
 import kz.android.data.db.SavedNews
@@ -29,9 +28,7 @@ class NewsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getSavedNews(): List<SavedNewsEntity> {
-        return dao.getAllSavedNews()
-            .first() // Берем первый эмитированный элемент из Flow
-            .map { it.toDomain() }
+        return dao.getAllSavedNews().map { it.toDomain() }
     }
 
     override suspend fun saveNews(news: SavedNewsEntity) {

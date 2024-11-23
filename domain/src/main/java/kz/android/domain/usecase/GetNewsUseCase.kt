@@ -4,7 +4,7 @@ import kz.android.domain.model.Article
 import kz.android.domain.repository.NewsRepository
 import javax.inject.Inject
 
-class GetNewsUseCase @Inject constructor(
+open class GetNewsUseCase @Inject constructor(
     private val repository: NewsRepository
 ) {
     suspend operator fun invoke(query: String, from: String): List<Article> {

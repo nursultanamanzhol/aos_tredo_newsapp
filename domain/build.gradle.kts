@@ -25,12 +25,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
@@ -38,7 +38,7 @@ dependencies {
 //    implementation(project(":data"))
     // Только базовые зависимости, так как domain — независимый модуль.
     implementation(libs.androidx.core.ktx)
-    implementation("javax.inject:javax.inject:1")
+    implementation(libs.javax.inject)
     // Для тестов
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import kz.android.domain.model.Article
 import kz.android.domain.usecase.GetNewsUseCase
 import kz.android.domain.usecase.SaveNewsUseCase
-import kotlinx.coroutines.launch
 import kz.android.ui.toSavedNewsEntity
 import javax.inject.Inject
 
@@ -22,9 +22,17 @@ class NewsViewModel @Inject constructor(
     val news: LiveData<List<Article>> get() = _news
 
     fun fetchNews(query: String, from: String) {
+        if (query.isBlank()) {
+            _news.value = emptyList()
+            return
+        }
         viewModelScope.launch {
             _news.value = getNewsUseCase(query, from)
         }
+    }
+
+    fun sortNewsByDate() {
+        _news.value = _news.value?.sortedByDescending { it.publishedAt }
     }
 
     fun saveNews(article: Article) {
@@ -32,5 +40,4 @@ class NewsViewModel @Inject constructor(
             saveNewsUseCase.invoke(article.toSavedNewsEntity())
         }
     }
-
 }
