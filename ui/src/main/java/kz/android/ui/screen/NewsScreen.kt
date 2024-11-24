@@ -2,6 +2,7 @@ package kz.android.ui.screen
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -67,6 +68,9 @@ fun NewsScreen(viewModel: NewsViewModel = hiltViewModel()) {
                             viewModel.saveNews(article)
                         },
                         onOpen = {
+                            val intent = Intent(context, WebViewActivity::class.java)
+                            intent.putExtra("url", article.url)
+                            context.startActivity(intent)
                             Log.d("NewsScreen", "Opening article with URL: ${article.url}")
                         }
                     )

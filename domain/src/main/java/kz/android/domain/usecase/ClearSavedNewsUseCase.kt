@@ -7,6 +7,6 @@ class ClearSavedNewsUseCase @Inject constructor(
     private val repository: NewsRepository
 ) {
     suspend operator fun invoke() {
-        repository.clearSavedNews()
+        repository.clearAllNews()
     }
 }

@@ -10,8 +10,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -24,7 +24,7 @@ fun SavedNewsScreen(
     navController: NavHostController,
     viewModel: SavedNewsViewModel = hiltViewModel()
 ) {
-    val savedNews by viewModel.savedNews.observeAsState(emptyList())
+    val savedNews: List<SavedNewsEntity> by viewModel.savedNews.collectAsState()
 
     Column {
         Button(
@@ -50,9 +50,7 @@ fun SavedNewsScreen(
                     SavedNewsItem(
                         article = article,
                         onOpen = {
-                            // Сохраняем текущую статью в ViewModel
-                            viewModel.selectArticle(article)
-                            // Переходим на экран деталей
+                            viewModel.setCurrentArticle(article)
                             navController.navigate("details")
                         }
                     )

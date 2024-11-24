@@ -36,9 +36,11 @@ android {
 }
 
 dependencies {
-    // Только базовые зависимости, так как domain — независимый модуль.
     implementation(libs.androidx.core.ktx)
     implementation(libs.javax.inject)
+    //flow
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
     // Для тестов
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

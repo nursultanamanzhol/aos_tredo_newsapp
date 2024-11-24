@@ -1,6 +1,5 @@
 package kz.android.data.db
 
-import android.util.Log
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kz.android.domain.model.SavedNewsEntity
@@ -23,7 +22,6 @@ data class SavedNews(
 
     companion object {
         fun fromDomain(savedNewsEntity: SavedNewsEntity): SavedNews {
-            Log.d("SavedNews", "Converting from domain: $savedNewsEntity")
             return SavedNews(
                 url = savedNewsEntity.url,
                 title = savedNewsEntity.title,

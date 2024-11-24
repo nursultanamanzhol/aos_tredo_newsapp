@@ -1,58 +1,49 @@
 package kz.android.ui.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kz.android.domain.model.SavedNewsEntity
+import kz.android.domain.repository.NewsRepository
 import kz.android.domain.usecase.ClearSavedNewsUseCase
-import kz.android.domain.usecase.GetSavedNewsUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class SavedNewsViewModel @Inject constructor(
-    private val getSavedNewsUseCase: GetSavedNewsUseCase,
+    private val repository: NewsRepository,
     private val clearSavedNewsUseCase: ClearSavedNewsUseCase
 ) : ViewModel() {
 
-    private val _savedNews = MutableLiveData<List<SavedNewsEntity>>()
-    val savedNews: LiveData<List<SavedNewsEntity>> get() = _savedNews
+    // Используем MutableStateFlow вместо LiveData
+    private val _currentArticle = MutableStateFlow<SavedNewsEntity?>(null)
+    val currentArticle: StateFlow<SavedNewsEntity?> = _currentArticle.asStateFlow()
 
-    private val _currentArticle = MutableLiveData<SavedNewsEntity?>()
-    val currentArticle: LiveData<SavedNewsEntity?> get() = _currentArticle
+    // Подгружаем сохраненные новости из репозитория
+    val savedNews: StateFlow<List<SavedNewsEntity>> = repository.getAllSavedNews()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
 
-    init {
-        fetchSavedNews()
-    }
-
-    fun selectArticle(article: SavedNewsEntity) {
-        Log.d("SavedNewsViewModel", "Selected article: $article")
+    // Устанавливаем текущую статью
+    fun setCurrentArticle(article: SavedNewsEntity) {
         _currentArticle.value = article
     }
 
-
-    fun fetchSavedNews() {
+    // Обновляем новость
+    fun updateNews(news: SavedNewsEntity) {
         viewModelScope.launch {
-            try {
-                val data = getSavedNewsUseCase.invoke()
-                _savedNews.postValue(data)
-            } catch (e: Exception) {
-                Log.e("SavedNewsViewModel", "Error fetching saved news: ${e.message}")
-            }
+            repository.updateNews(news)
         }
     }
 
+    // Очищаем все сохраненные новости
     fun clearSavedNews() {
         viewModelScope.launch {
-            try {
-                clearSavedNewsUseCase.invoke()
-                fetchSavedNews()
-            } catch (e: Exception) {
-                Log.e("SavedNewsViewModel", "Error clearing saved news: ${e.message}")
-            }
+            clearSavedNewsUseCase()
         }
     }
 }

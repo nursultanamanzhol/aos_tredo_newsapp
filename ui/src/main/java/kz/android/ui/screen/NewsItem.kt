@@ -16,7 +16,11 @@ import androidx.compose.ui.unit.dp
 import kz.android.domain.model.Article
 
 @Composable
-fun NewsItem(article: Article, onSave: () -> Unit, onOpen: () -> Unit) {
+fun NewsItem(
+    article: Article,
+    onSave: () -> Unit,
+    onOpen: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
