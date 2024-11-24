@@ -1,4 +1,4 @@
-package kz.android.data.di
+package kz.android.data.api.di
 
 import android.content.Context
 import androidx.room.Room
@@ -18,7 +18,11 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): NewsDatabase {
-        return Room.databaseBuilder(context, NewsDatabase::class.java, "news_db").build()
+        return Room.databaseBuilder(
+            context,
+            NewsDatabase::class.java,
+            "news_db"
+        ).build()
     }
 
     @Provides

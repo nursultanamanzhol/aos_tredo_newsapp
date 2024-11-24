@@ -1,4 +1,4 @@
-package kz.android.data.di
+package kz.android.data.api.di
 
 import dagger.Binds
 import dagger.Module

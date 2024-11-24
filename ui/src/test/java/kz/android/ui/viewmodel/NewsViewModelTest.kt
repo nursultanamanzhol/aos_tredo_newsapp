@@ -48,11 +48,11 @@ class NewsViewModelTest {
                 author = "Author",
                 content = "Content",
                 url = "url",
-                publishedAt = "2023-11-20"
+                publishedAt = "2024-10-23"
             )
         )
 
-        viewModel.fetchNews("query", "2023-11-20")
+        viewModel.fetchNews("query", "2024-10-23")
         testDispatcher.scheduler.advanceUntilIdle() // Убедиться, что все корутины завершены
 
         assertEquals("Test", viewModel.news.value?.first()?.title)

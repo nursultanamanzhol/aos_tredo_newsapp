@@ -82,6 +82,12 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    //nav
+//    implementation("com.google.accompanist:accompanist-navigation-animation:<>")
+
+
     // Android Testing
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

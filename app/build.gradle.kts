@@ -1,5 +1,7 @@
 import java.util.Properties
 import java.io.File
+import org.gradle.api.JavaVersion
+import org.gradle.api.GradleException
 
 plugins {
     alias(libs.plugins.android.application)
@@ -18,6 +20,10 @@ val apiKey: String? = if (localProperties.exists()) {
     null
 }
 
+if (apiKey.isNullOrBlank()) {
+    throw GradleException("API Key not found! Add NEWS_API_KEY to your local.properties file.")
+}
+
 android {
     namespace = "kz.android.aos_tredo_newsapp"
     compileSdk = 34
@@ -29,7 +35,7 @@ android {
         versionCode = 1
         versionName = "1.0.0"
 
-        buildConfigField("String", "NEWS_API_KEY", "\"${apiKey ?: ""}\"")
+        buildConfigField("String", "NEWS_API_KEY", "\"${apiKey}\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -58,9 +64,8 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.15"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
-
 
     java {
         toolchain {

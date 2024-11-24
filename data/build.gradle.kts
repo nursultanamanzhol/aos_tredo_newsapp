@@ -43,6 +43,7 @@ dependencies {
     // Retrofit для работы с API
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
     // Room для локального хранения данных
     implementation(libs.androidx.room.runtime)
